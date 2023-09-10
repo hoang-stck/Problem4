@@ -1,0 +1,16 @@
+body {
+    background-color: lightblue;
+    color: red;
+    max-width: 500px;
+    margin: auto;
+}
+
+#output {
+    width: 300px;
+    border: 2px solid black;
+    background-color: white;
+    padding: 50px;
+    margin: 20px;
+    text-align: left;
+    object-fit: cover;
+}
