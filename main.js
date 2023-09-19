@@ -5,17 +5,32 @@ function readFileA () {
   //READ SELECTED FILE
   let reader = new FileReader();
   reader.addEventListener("loadend", () => {
-    document.getElementById("output").innerHTML = reader.result;
+    let content = reader.result;
+    const lines = content.split('\n');
+
+    const capitalizedContent = lines.map(line => {
+      if (line.length > 0) {
+        return line.charAt(0).toUpperCase() + line.slice(1);
+      } else {
+      return line;
+      }
+    });
+    const result = capitalizedContent.join('<br>');
+
+    document.getElementById("output").innerHTML = result;
   });
   reader.readAsText(selected);
 }
 
-  function capitalizeFirstLetter(word) {
-      if (typeof word !== 'string') {
-          return word; //return the input as is if it's not a string
-      }
-
-      //use the charArt method to get the file letter and capitalize it
-      return word.charAt(0).toUpperCase() + word.slice(1);
-  }
-
+document.getElementById("downloadButton").addEventListener("click", function() {
+  var content = document.getElementById("content").innerText;
+  var blob = new Blob([content], {type: "text/plain"});
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "div_content.txt";
+  a.style.display = "none";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(a.href);
+});
